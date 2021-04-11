@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "993770435572",
+    "project_id": "arctic-welder-306810",
+    "storage_bucket": "arctic-welder-306810.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993770435572:android:d611a4970be1785ffabfa1",
+        "android_client_info": {
+          "package_name": "com.example.flutter_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993770435572-nlb44mpdklolit6lof0sjrh97jambg3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDvWV8XC4EX7mKX3PsIJjox9gas2MgMHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "993770435572-nlb44mpdklolit6lof0sjrh97jambg3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
