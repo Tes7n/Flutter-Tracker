@@ -2,7 +2,7 @@
 
 A new Flutter application.
 
-## Note: all the features are not in the master branch. They are committed in separate branches!
+## Note: All the features are not in the master branch. They are committed in separate branches!
 
 ## Getting Started
 
