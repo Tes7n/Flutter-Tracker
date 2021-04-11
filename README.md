@@ -2,6 +2,8 @@
 
 A new Flutter application.
 
+Note: all the features are not in the master branch. They are committed in separate branches!
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
