@@ -2,31 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_tracker/app/home_page.dart';
 import 'package:flutter_tracker/app/sign_in/signinpage.dart';
+import 'package:flutter_tracker/services/auth.dart';
+import 'package:flutter_tracker/services/auth_provider.dart';
 
-class LandingPage extends StatefulWidget {
-  @override
-  _State createState() => _State();
-}
+class LandingPage extends StatelessWidget {
+  // LandingPage({@required this.auth});
 
-class _State extends State<LandingPage> {
-  User _user;
-
-  void _updateUser(User user) {
-    setState(() {
-      _user = user;
-    });
-    // print('UserId: ${user.uid}');
-  }
-
+  // final AuthBase auth;
   @override
   Widget build(BuildContext context) {
-    if (_user == null) {
-      return SignInPage(
-        onSignIn: _updateUser,
-      );
-    }
-    return HomePage(
-      onSignOut: () => _updateUser(null),
+    final auth = AuthProvider.of(context);
+    return StreamBuilder<GUser>(
+        stream:auth.onAuthStateChanged,
+        builder: (context,snapshot)
+        {
+          if (snapshot.connectionState==ConnectionState.active){
+            GUser gUser = snapshot.data;
+            if (gUser == null) {
+              return SignInPage(
+
+
+              );
+            }
+            return HomePage(
+
+
+            );
+          }
+          else{
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+
+          }
+        }
     );
+
   }
 }
