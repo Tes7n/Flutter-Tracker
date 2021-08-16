@@ -5,7 +5,7 @@ import 'package:flutter_tracker/app/sign_in/emailsigninpage.dart';
 import 'package:flutter_tracker/app/sign_in/signinbutton.dart';
 import 'package:flutter_tracker/app/sign_in/socialsigninbutton.dart';
 import 'package:flutter_tracker/services/auth.dart';
-import 'package:flutter_tracker/services/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
   // SignInPage({@required this.auth});
@@ -14,7 +14,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context , listen: false);
       await auth.signInAnonymously();
     } catch (e) {
       print(e.toString());
@@ -23,7 +23,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context , listen: false);
       await auth.signInWithGoogle();
     } catch (e) {
       print(e.toString());

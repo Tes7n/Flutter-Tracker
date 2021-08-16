@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_tracker/app/home_page.dart';
 import 'package:flutter_tracker/app/sign_in/signinpage.dart';
 import 'package:flutter_tracker/services/auth.dart';
-import 'package:flutter_tracker/services/auth_provider.dart';
+import 'package:provider/provider.dart';
+
 
 class LandingPage extends StatelessWidget {
   // LandingPage({@required this.auth});
@@ -11,7 +12,7 @@ class LandingPage extends StatelessWidget {
   // final AuthBase auth;
   @override
   Widget build(BuildContext context) {
-    final auth = AuthProvider.of(context);
+    final auth = Provider.of<AuthBase>(context, listen: false);
     return StreamBuilder<GUser>(
         stream:auth.onAuthStateChanged,
         builder: (context,snapshot)
