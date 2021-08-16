@@ -22,9 +22,11 @@ class CustomElevatedButton extends StatelessWidget {
         child: child,
         style: ElevatedButton.styleFrom(
           primary: color,
+            onSurface: color.withOpacity(0.90),//disabled color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
+
         ),
         onPressed: onPressed,
       ),

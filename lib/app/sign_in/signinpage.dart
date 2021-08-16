@@ -7,26 +7,39 @@ import 'package:flutter_tracker/app/sign_in/socialsigninbutton.dart';
 import 'package:flutter_tracker/services/auth.dart';
 import 'package:provider/provider.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   // SignInPage({@required this.auth});
   //
   // final AuthBase auth;
 
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  bool _isLoading = false;
+
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      final auth = Provider.of<AuthBase>(context , listen: false);
+      setState(() => _isLoading = true);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInAnonymously();
     } catch (e) {
       print(e.toString());
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      final auth = Provider.of<AuthBase>(context , listen: false);
+      setState(() => _isLoading = true);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInWithGoogle();
     } catch (e) {
       print(e.toString());
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
@@ -60,10 +73,9 @@ class SignInPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Sign in',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
+          SizedBox(
+            height: 50,
+            child: _buildHeader(),
           ),
           SizedBox(
             height: 28.0,
@@ -73,7 +85,7 @@ class SignInPage extends StatelessWidget {
             assetName: 'images/google-logo.png',
             color: Colors.white,
             textColor: Colors.black87,
-            onPressed: ()=>_signInWithGoogle(context),
+            onPressed: _isLoading ? null : () => _signInWithGoogle(context),
           ),
           SizedBox(
             height: 8.0,
@@ -83,7 +95,7 @@ class SignInPage extends StatelessWidget {
             assetName: 'images/facebook-logo.png',
             color: Color(0xFF334D92),
             textColor: Colors.white,
-            onPressed: () {},
+            onPressed:  _isLoading ? null : () {},
           ),
           SizedBox(
             height: 8.0,
@@ -92,7 +104,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with email',
             color: Colors.teal[700],
             textColor: Colors.white,
-            onPressed: () =>_signInWithEmail(context),
+            onPressed:  _isLoading ? null : () => _signInWithEmail(context),
           ),
           SizedBox(
             height: 8.0,
@@ -109,10 +121,23 @@ class SignInPage extends StatelessWidget {
             text: 'Go anonymous',
             color: Colors.lime[300],
             textColor: Colors.black87,
-            onPressed:()=> _signInAnonymously(context),
+            onPressed:  _isLoading ? null : () => _signInAnonymously(context),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    if (_isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return Text(
+      'Sign in',
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
     );
   }
 }
